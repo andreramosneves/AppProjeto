@@ -1,0 +1,18 @@
+<cenario>
+<retangulos>
+<retangulo>
+<posx>20</posx>
+<posy>20</posy>
+<largura>50</largura>
+<altura>0</altura>
+<item>Log:public void ejb.beans.UsuarioBean.sucesso()</item>
+</retangulo>
+<retangulo>
+<posx>90</posx>
+<posy>20</posy>
+<largura>50</largura>
+<altura>2</altura>
+<item>Log:public void ejb.beans.UsuarioBean.falha()</item>
+</retangulo>
+</retangulos>
+</cenario>

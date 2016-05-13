@@ -1,0 +1,20 @@
+Nome: André Ramos Neves 
+	  Denis Nascimento 
+
+
+Bloco 1 -
+1-) Na BibliotecaCompartilhada que foi adicionado ao Módulo EJB, e no AppFrontController.
+
+2-) Não faria sentido guarda um espaço de memória, já que não irá usar em outra parte da aplicação, além do bean somente processar, não tratar o Estado da entidade Posicao.
+
+3-) Foi criado em um modulo Bean chamado ModuloEJB no pacote ejb.beans, e o módulo foi adicionado no AppEnterprise.
+
+4-) Foi criado em um modulo Bean chamado ModuloEJB no pacote ejb.services, e após adicionar no AppEnterprise.
+
+Bloco 2 - 
+1-) Foi alterado as exceções do Filtro para que ele não passe quando terminar como LP3Rest
+
+Bloco 3 - 
+
+1 -) Essa requisição: "http://localhost:8080/AppFrontController/LP3Rest/lp3/posicoes/mackTest@mack.br", pois não necessita de montar um XML específicio, só informar o login, diferentemente das outras requisições.
+

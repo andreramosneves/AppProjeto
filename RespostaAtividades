@@ -1,0 +1,29 @@
+Bloco 1
+1-) Foi criado um Data Source DerbyDS no nosso servidor de aplicação, criamos a classe UsuárioBean para o acesso do JPA, e a nossa classe de entidade Usuário. Foi alterado o xml persistence para acessar nosso DataSource.
+ E para acessar o DataSource foi um servlet anotado pelo EJB.
+ 
+Bloco 2
+1- É uma função que mapeia os dados. Ela recebe dados de entrada e retorna um codigo unico independente do tamanho
+gerando identificador unico de tamanho fixo para o valor de entrada.
+
+2-Sim, questões éticas na qual o desenvolvedor não pode ter conhecimento da senha do usuário e também na garantia de segurança de dados do usuário, ou seja , a senha não cair nas mãos erradas.
+
+Bloco 3
+
+1 - Substituindo as classes de queue como mostra abaixo:
+
+QueueConnectionFactory -> TopicConnectionFactory
+QueueConnection - > TopicConnection
+Queue - > Topic
+QueueSession -> TopicSession
+QueueSender -> TopicPublisher
+QueueReceiver -> TopicSubscriber
+
+
+2 - Quando for necessario enviar a mensagens para todos assinantes.
+
+
+Bloco 4
+
+
+

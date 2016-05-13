@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pagina Principal</title>
+        <link rel="stylesheet" href="css/projeto.css">
+    </head>
+    <body>
+        <h2>Exemplo de uso de FrontController</h2>
+    <h1>Listar Todos: </h1>
+       
+    <!--<a href="ListaServlet">Lista</a> -->
+
+    <a href="FrontControllerServlet?control=Lista">Lista</a>
+    <form action="FrontControllerServlet">
+        <h2> Buscar por Nome </h2> 
+
+        <label>Informe o Nome do Usuário que Deseja Buscar: </label>
+        <input type="text" name="nome" id="nome">
+        <input type="hidden" name="control" id="control" value="Busca">
+
+        <input type="submit" value="BUSCAR">
+    </form>
+
+</body>
+</html>
