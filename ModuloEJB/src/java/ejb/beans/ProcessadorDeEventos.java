@@ -12,7 +12,7 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import shared.entities.Log;
+import ejb.entities.Log;
 
 @MessageDriven(name = "EventMDB", activationConfig = {
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue

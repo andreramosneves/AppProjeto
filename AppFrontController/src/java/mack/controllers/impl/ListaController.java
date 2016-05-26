@@ -6,6 +6,7 @@ import ejb.beans.UsuarioBean;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import ejb.entities.Usuario;
 
 
 public class ListaController extends AbstractController {

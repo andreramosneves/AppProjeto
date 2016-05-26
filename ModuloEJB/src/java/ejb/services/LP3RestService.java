@@ -3,6 +3,8 @@ package ejb.services;
 
 import ejb.beans.PosicaoBean;
 import ejb.beans.UsuarioBean;
+import ejb.entities.Posicao;
+import ejb.entities.Usuario;
 import java.io.StringReader;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,8 +22,6 @@ import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import shared.entities.Posicao;
-import shared.entities.Usuario;
 
 @Stateless
 @LocalBean

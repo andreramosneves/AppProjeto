@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -14,9 +16,9 @@ import org.apache.http.impl.client.HttpClients;
 
 public class ClienteRestNovoUsuario {
 
-    public static void main(String[] args) throws IOException {
-        String udata = "<usuario><nome>MackTest</nome><login>mackTest@mack.br</login>";
-        udata = udata + "<sobrenome>JR</sobrenome><senha>senha</senha></usuario>";
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+        String udata = "<usuario><nome>denis</nome><login>denis</login>";
+        udata = udata + "<sobrenome>JR</sobrenome><senha>" + Hash.generateStrongPasswordHash("senha")  + "</senha></usuario>";
         HttpClient cliente = HttpClients.createDefault();
         HttpPut httpput = new HttpPut("http://localhost:8080/AppFrontController/LP3Rest/lp3/novousuario");
         StringEntity se = new StringEntity(udata, ContentType.TEXT_XML);

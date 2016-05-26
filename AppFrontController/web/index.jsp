@@ -3,7 +3,7 @@
     Created on : 07/04/2014, 20:49:49
 --%>
 
-<%@page import="shared.entities.Usuario"%>
+<%@page import="ejb.entities.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 

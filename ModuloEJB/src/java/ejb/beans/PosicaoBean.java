@@ -6,7 +6,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import shared.entities.Posicao;
+import ejb.entities.Posicao;
 
 @Stateless
 @LocalBean

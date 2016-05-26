@@ -45,7 +45,6 @@ select {
     background: -ms-linear-gradient(top, #69c4e8, #21a1d4);
     background: -webkit-linear-gradient(top, #69c4e8, #21a1d4);
     background: -moz-linear-gradient(top, #69c4e8, #21a1d4);
-    //background: linear-gradient(to bottom, #69c4e8, #21a1d4);
     box-shadow: inset 0 -3px 0 #1f97c7, inset 0 -3px 3px #1f9acc, inset 0 2px 2px #9ad7ef, inset 1px 0 2px #22a4d9, inset -1px 0 2px #22a4d9, 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
 
 }
@@ -55,7 +54,6 @@ input[type=button], input[type=submit], input[type=reset] {
     background: -ms-linear-gradient(top, #69c4e8, #21a1d4);
     background: -webkit-linear-gradient(top, #69c4e8, #21a1d4);
     background: -moz-linear-gradient(top, #69c4e8, #21a1d4);
-    //background: linear-gradient(to bottom, #69c4e8, #21a1d4);
     box-shadow: inset 0 -3px 0 #1f97c7, inset 0 -3px 3px #1f9acc, inset 0 2px 2px #9ad7ef, inset 1px 0 2px #22a4d9, inset -1px 0 2px #22a4d9, 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
     border: none;
     color: white;
@@ -78,7 +76,7 @@ input[type=button], input[type=submit], input[type=reset] {
     padding-bottom: 0px;
     padding-left: 0px;
 }
-//------------------------------------------------------------
+
 #cssmenu,
 #cssmenu ul,
 #cssmenu ul li,
@@ -116,7 +114,6 @@ input[type=button], input[type=submit], input[type=reset] {
     background: -ms-linear-gradient(top, #69c4e8, #21a1d4);
     background: -webkit-linear-gradient(top, #69c4e8, #21a1d4);
     background: -moz-linear-gradient(top, #69c4e8, #21a1d4);
-    //background: linear-gradient(to bottom, #69c4e8, #21a1d4);
     box-shadow: inset 0 -3px 0 #1f97c7, inset 0 -3px 3px #1f9acc, inset 0 2px 2px #9ad7ef, inset 1px 0 2px #22a4d9, inset -1px 0 2px #22a4d9, 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.06), 0 3px 3px rgba(0, 0, 0, 0.17), 2px 1px 2px rgba(0, 0, 0, 0.05), -2px 1px 2px rgba(0, 0, 0, 0.05);
 }
 #cssmenu.align-center > ul {
@@ -176,7 +173,6 @@ input[type=button], input[type=submit], input[type=reset] {
     background: -ms-linear-gradient(top, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
     background: -moz-linear-gradient(top, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
     background: -o-linear-gradient(top, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
-    //background: linear-gradient(to bottom, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
     box-shadow: inset 0 -1px 1px #209ed0, inset 0 2px 1px #7fcceb;
     background-size: 36px 36px;
     background-position: 0 0;
@@ -282,7 +278,6 @@ input[type=button], input[type=submit], input[type=reset] {
     background: -ms-linear-gradient(top, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
     background: -moz-linear-gradient(top, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
     background: -o-linear-gradient(top, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
-    //background: linear-gradient(to bottom, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
     box-shadow: inset 0 -1px 1px #209ed0, inset 0 2px 1px #7fcceb;
     background-size: 36px 36px;
     background-position: 0 0;
@@ -416,7 +411,6 @@ input[type=button], input[type=submit], input[type=reset] {
         background: -ms-linear-gradient(top, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
         background: -moz-linear-gradient(top, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
         background: -o-linear-gradient(top, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
-        //background: linear-gradient(to bottom, #58bde5 0%, #4ab7e3 25%, #2babde 50%, #58bde5 75%, #4ab7e3 100%);
         box-shadow: inset 0 -1px 1px #209ed0, inset 0 2px 1px #7fcceb;
         background-size: 56px 56px;
         background-position: 0 0;

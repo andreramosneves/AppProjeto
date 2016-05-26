@@ -1,5 +1,14 @@
-package mack.entities;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ejb.entities;
 
+/**
+ *
+ * @author denis
+ */
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,28 +16,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "tb_usuario")
-public class Usuario_antig {
+@XmlRootElement
+public class Usuario {
 
     @Id
     @Column(name = "usuario_id")
-    @SequenceGenerator(name = "usuarioGenerator", sequenceName = "usuario_id_sequence",
-            allocationSize = 1)
+    @SequenceGenerator(name = "usuarioGenerator",
+            sequenceName = "usuario_id_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuarioGenerator")
     private int id;
-
+   
     @Column(name = "nome")
     private String nome;
-
+   
     @Column(name = "sobrenome")
     private String sobrenome;
+    
+    @Column(name = "senha")
+    private String senha;
 
-    public Usuario_antig() {
+    public Usuario() {
     }
 
-    public Usuario_antig(int id, String nome, String sobrenome) {
+    public Usuario(int id, String nome, String sobrenome) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -54,6 +68,16 @@ public class Usuario_antig {
         return this.id;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+
+    
     public String toString() {
         StringBuffer sbResult = new StringBuffer();
         sbResult.append("id = ");

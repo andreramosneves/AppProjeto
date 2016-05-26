@@ -1,4 +1,5 @@
 package ejb.beans;
+
 import ejb.interceptor.LogInterceptor;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -7,49 +8,123 @@ import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import shared.entities.Usuario;
+import ejb.entities.Usuario;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
 
 @Stateless
 @LocalBean
 public class UsuarioBean {
-    
 
-@PersistenceContext(unitName = "DerbyPU")
- private EntityManager em;
+    private final static String apikey = "c2a9c817c3b293d067a7f59406abde0b0a1e3e78";
+    private static String privatekey = "f33eb15f5b1bf8d7da85f6d1d206f83c";
+    private static String urlbase = "http://gateway.marvel.com/v1/public/characters";
 
- public void save(Usuario u) {
- 
- 
- em.persist(u);
- }
-  
- 
- public List<Usuario> list() {
- Query query = em.createQuery("FROM Usuario u");
- List<Usuario> list = query.getResultList();
- return list;
- }
+    @PersistenceContext(unitName = "DerbyPU")
+    private EntityManager em;
 
+    public void save(Usuario u) {
 
-public boolean buscaPorNomeSenha(final String nome, String senha) {
+        em.persist(u);
+    }
+
+    public List<Usuario> list() {
+        Query query = em.createQuery("FROM Usuario u");
+        List<Usuario> list = query.getResultList();
+        return list;
+    }
+    public static String MD5(String md5) {
+        try {
+           java.security.MessageDigest md =      java.security.MessageDigest.getInstance("MD5");
+           byte[] array = md.digest(md5.getBytes());
+           StringBuilder sb = new StringBuilder();
+           for (int i = 0; i < array.length; ++i) {
+               sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+           }
+           return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+        }
+        return null;
+    }
+    public boolean buscaPorNomeSenha(final String nome, String senha) {
         try {
             Query query = em.createQuery("FROM Usuario u where u.nome = :username");
             query.setParameter("username", nome);
             return Hash.validaSenha(senha, ((Usuario) query.getResultList().get(0)).getSenha());
-        } catch (IndexOutOfBoundsException ex ) {
+        } catch (IndexOutOfBoundsException ex) {
             return false;
-        } catch(Exception ecc){
+        } catch (Exception ecc) {
             ecc.printStackTrace();
             return false;
         }
     }
- 
-@Interceptors(LogInterceptor.class)
-public void sucesso(){
+
+    public void acessaAPIMarvel(){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyyhhmmss");
+        String ts = sdf.format(date);
+
+        //Criação do HASH
+        String hashStr = MD5( ts+privatekey+apikey );
+        String uri;
+        String name="Captain%20America";
+        //url de consulta
+        uri = urlbase + "?nameStartsWith=" + name + "&ts=" + ts + "&apikey=" + apikey + "&hash=" + hashStr;
+
+        try{
+        HttpClient cliente = HttpClients.createDefault();
+
+        HttpHost proxy = new HttpHost("172.16.0.10", 3128, "http");
+        RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+        HttpGet httpget = new HttpGet(uri);
+        httpget.setConfig(config);
+        HttpResponse response = cliente.execute(httpget);
+        System.out.println("----------------------------------------");
+        System.out.println(response.getStatusLine());
+        Header[] h = response.getAllHeaders();
+
+        for (Header head:h){
+            System.out.println(head.getValue());
+        }
+
+        HttpEntity entity = response.getEntity();
+
+        if (entity != null) {
+            InputStream instream = entity.getContent();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(instream));
+            StringBuilder out = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                out.append(line);
+            }
+            System.out.println(out.toString());
+            reader.close();
+            instream.close();
+        }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }
     
-}
-@Interceptors(LogInterceptor.class)
-public void falha(){
-    
-}
+    @Interceptors(LogInterceptor.class)
+    public void sucesso() {
+
+    }
+
+    @Interceptors(LogInterceptor.class)
+    public void falha() {
+
+    }
 }
