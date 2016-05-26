@@ -32,7 +32,7 @@ public class FiltroAutenticacao implements Filter {
         HttpSession session = req.getSession(false);
 
         if (session == null && !(uri.endsWith("html") || uri.endsWith("LoginServlet")|| uri.contains("LP3Rest")
-                || uri.endsWith("CadLogin") || uri.endsWith("css"))) {
+                || uri.endsWith("CadLogin") || uri.endsWith("css") || uri.endsWith("js"))) {
             this.context.log("Unauthorized access request");
             res.sendRedirect("login.html");
         } else {
