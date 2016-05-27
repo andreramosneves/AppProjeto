@@ -16,20 +16,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 
 @Stateless
 @LocalBean
 public class UsuarioBean {
+//    private final static String apikey = "8a362aa3872e40564830a7564af63707";
+//    private static String privatekey = "cf64ae1ac91ecb74a75f6ee47571d6d244409d6c";
 
-    private final static String apikey = "c2a9c817c3b293d067a7f59406abde0b0a1e3e78";
-    private static String privatekey = "f33eb15f5b1bf8d7da85f6d1d206f83c";
-    private static String urlbase = "http://developer.marvel.com";
+    private final static String apikey =   "f33eb15f5b1bf8d7da85f6d1d206f83c";
+    private static String privatekey =   "c2a9c817c3b293d067a7f59406abde0b0a1e3e78";
+    private static String urlbase = "http://gateway.marvel.com/v1/public/characters";
 
     @PersistenceContext(unitName = "DerbyPU")
     private EntityManager em;
@@ -81,14 +81,14 @@ public class UsuarioBean {
         String name="Captain%20America";
         //url de consulta
         uri = urlbase + "?nameStartsWith=" + name + "&ts=" + ts + "&apikey=" + apikey + "&hash=" + hashStr;
-
+        System.out.println(uri);
         try{
         HttpClient cliente = HttpClients.createDefault();
 
-        HttpHost proxy = new HttpHost("172.16.0.10", 3128, "http");
-        RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+//        HttpHost proxy = new HttpHost("localhost", 8080, "http");
+//        RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
         HttpGet httpget = new HttpGet(uri);
-        httpget.setConfig(config);
+//        httpget.setConfig(config);
         HttpResponse response = cliente.execute(httpget);
         System.out.println("----------------------------------------");
         System.out.println(response.getStatusLine());
