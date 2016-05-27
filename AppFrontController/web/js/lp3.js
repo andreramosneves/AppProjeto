@@ -4,7 +4,9 @@
 var userName = "denis";
 //apresenta no console de execução do javascript o valor da variável userName
 console.log(userName);
-
+var container;
+var content;
+var closer;
 //define a url da chamada REST (GET)
 
 var urlString = 'http://localhost:8081/AppFrontController/LP3Rest/lp3/posicoes/';
@@ -34,10 +36,22 @@ var pointStyle = new ol.style.Style({
 
 var meuMapa;
 function init() {
+    container = document.getElementById('popup');
+    content = document.getElementById('popup-content');
+    closer = document.getElementById('popup-closer');
+    var overlay = new ol.Overlay(({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+            duration: 250
+        }
+    }));
+
 
     meuMapa = new ol.Map({
         target: 'MeuMapa',
         renderer: 'canvas',
+        overlays: [overlay],
         view: new ol.View({
             projection: 'EPSG:900913',
             center: [-5193252.61684, -2698365.38923],
@@ -47,6 +61,8 @@ function init() {
     var openStreetMapLayer = new ol.layer.Tile({
         source: new ol.source.OSM()
     });
+
+
     meuMapa.addLayer(openStreetMapLayer);
     var bingLayer = new ol.layer.Tile({
         source: new ol.source.BingMaps({
@@ -56,6 +72,19 @@ function init() {
     });
     bingLayer.setOpacity(.3);
     meuMapa.addLayer(bingLayer);
+    closer.onclick = function () {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+    };
+
+    meuMapa.on('singleclick', function (evt) {
+        var coordinate = evt.coordinate;
+        var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(coordinate, 'EPSG:900913',
+                'EPSG:4326'));
+        content.innerHTML = '<p>Posição Atual:</p><code>' + hdms + '</code>';
+        overlay.setPosition(coordinate);
+    });
 
     $.ajax({
         url: urlString,
