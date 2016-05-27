@@ -69,7 +69,7 @@ function init() {
     $.ajax({
         url: urlString,
         data: {
-            format: 'xml'
+            format: 'json'
         },
         success: function (data) {
             console.log(data);
@@ -138,23 +138,30 @@ function init() {
                     });
             if (feature) {
                 popup.setPosition(evt.coordinate);
-                var xmlString;
-                var urlString = 'http://localhost:8081/AppFrontController/LP3Rest/lp3/posicoesXML/';
+//                var xmlString;
+                var urlString = 'http://gateway.marvel.com/v1/public/characters?nameStartsWith=Captain%20America&ts=05272016072544&apikey=f33eb15f5b1bf8d7da85f6d1d206f83c&hash=256693f22a9c43c88190e8005d9ebb05';
+//                var urlString = 'http://localhost:8081/AppFrontController/LP3Rest/lp3/posicoesXML/';
                 console.log(urlString);
-                urlString = urlString.concat(userName);
-                console.log(urlString);
+//                urlString = urlString.concat(userName);
+//                console.log(urlString);
                 $.ajax({
                     url: urlString,
                     data: {
-                        format: 'xml'
+//                        format: 'json'
                     },
                     success: function (data) {
-                        xmlString = (new XMLSerializer()).serializeToString(data);
-                        console.log(xmlString);
+//                        xmlString = (new XMLSerializer()).serializeToString(data);
+//                            console.log(dataJ['total']);
+                            var dataJ = data['data'];
+                            var results = dataJ['results'];
+                            var thumbnail = results[1].thumbnail;
+                        console.log(data['attributionHTML']);
                         $(element).popover({
                             'placement': 'top',
                             'html': true,
-                            'content': '<p>' + xmlString + '</p>'
+//                           content': '<img src=' + data['data'].results['name'] + '/>'
+                            'content': '<img height="100" width="100" src=' + thumbnail['path'] + '.jpg' + ' />'+
+                                    '<p>' + userName + '</p>'
                         });
                         $(element).popover('show');
                     },
