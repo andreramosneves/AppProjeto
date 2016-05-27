@@ -35,37 +35,37 @@ function init() {
     });
 
     meuMapa.addLayer(vectorLayer);
-    var element = document.getElementById('popup');
-    var popup = new ol.Overlay({
-        element: element,
-        positioning: 'bottom-center',
-        stopEvent: false
-    });
-    meuMapa.addOverlay(popup);
-    meuMapa.on('click', function (evt) {
-        var feature = meuMapa.forEachFeatureAtPixel(evt.pixel,
-                function (feature, layer) {
-                    return feature;
-                });
-        if (feature) {
-            popup.setPosition(evt.coordinate);
-            $(element).popover({
-                'placement': 'top',
-                'html': true,
-                'content': feature.get('name')
-            });
-            $(element).popover('show');
-        } else {
-            $(element).popover('destroy');
-        }
-    });
-    meuMapa.on('pointermove', function (e) {
-        if (e.dragging) {
-            $(element).popover('destroy');
-            return;
-        }
-        var pixel = meuMapa.getEventPixel(e.originalEvent);
-        var hit = meuMapa.hasFeatureAtPixel(pixel);
-        meuMapa.getTarget().style.cursor = hit ? 'pointer' : '';
-    });
+//    var element = document.getElementById('popup');
+//    var popup = new ol.Overlay({
+//        element: element,
+//        positioning: 'bottom-center',
+//        stopEvent: false
+//    });
+//    meuMapa.addOverlay(popup);
+//    meuMapa.on('click', function (evt) {
+//        var feature = meuMapa.forEachFeatureAtPixel(evt.pixel,
+//                function (feature, layer) {
+//                    return feature;
+//                });
+//        if (feature) {
+//            popup.setPosition(evt.coordinate);
+//            $(element).popover({
+//                'placement': 'top',
+//                'html': true,
+//                'content': feature.get('name')
+//            });
+//            $(element).popover('show');
+//        } else {
+//            $(element).popover('destroy');
+//        }
+//    });
+//    meuMapa.on('pointermove', function (e) {
+//        if (e.dragging) {
+//            $(element).popover('destroy');
+//            return;
+//        }
+//        var pixel = meuMapa.getEventPixel(e.originalEvent);
+//        var hit = meuMapa.hasFeatureAtPixel(pixel);
+////        meuMapa.getTarget().style.cursor = hit ? 'pointer' : '';
+//    });
 }

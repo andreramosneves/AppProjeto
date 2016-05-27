@@ -20,9 +20,9 @@ public class ClienteRestNovaPosicao {
         String pdata = "<posicao><login>denis</login>";
         pdata = pdata + "<timestamp>";
         Timestamp ts = new Timestamp(Calendar.getInstance().getTimeInMillis());
-        pdata = pdata + ts.toString() + "</timestamp><lat>0.00</lat><lon>10.00</lon></posicao>";
+        pdata = pdata + ts.toString() + "</timestamp><lat>0.0</lat><lon>10.0</lon></posicao>";
         HttpClient cliente = HttpClients.createDefault();
-        HttpPut httpput = new HttpPut("http://localhost:8080/AppFrontController/LP3Rest/lp3/novaposicao");
+        HttpPut httpput = new HttpPut("http://localhost:8081/AppFrontController/LP3Rest/lp3/novaposicao");
         StringEntity se = new StringEntity(pdata, ContentType.TEXT_XML);
         httpput.setEntity(se);
         HttpResponse response = cliente.execute(httpput);

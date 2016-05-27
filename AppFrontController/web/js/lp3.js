@@ -1,39 +1,40 @@
 // carrega na variável userName o valor do campo escondido com id="userValue"
 
-var userName = document.getElementById('userValue').value;
-
+//var userName = document.getElementById('userValue').value;
+var userName = "denis";
 //apresenta no console de execução do javascript o valor da variável userName
 console.log(userName);
 
 //define a url da chamada REST (GET)
 
-var urlString = 'http://localhost:8081/WebApp/locationServices/location/list/';
+var urlString = 'http://localhost:8081/AppFrontController/LP3Rest/lp3/posicoes/';
 
 //concatena o nome do usuário à consulta REST
 urlString = urlString.concat(userName);
+//urlString2 = urlString2.concat(userName);
 
-//executa a chamada ao webservice REST, recebe a resposta em um vetor de objetos JSON chamado data
-
-//chama a função plotOnMap passando o vetor como parametro.
-
-$.ajax({
-
-  url : urlString,
-  data : {
-    format : 'jsosn'
-  },
-  success : function(data) {
-    console.log(data);
-    plotOnMap(data);
-  },
-  error : function(e) {
-    console.log(e.message);
-  },
-  type : 'GET'
+var pointStyle = new ol.style.Style({
+    image: new ol.style.Icon(({
+        anchor: [0.5, 46],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        opacity: 0.75,
+        src: 'dados/r2d2.png'
+    }))
 });
+//var pointStyle = new ol.style.Style({
+//    image: new ol.style.Icon(({
+//        anchor: [0, 0],
+//        anchorXUnits: 'fraction',
+//        anchorYUnits: 'fraction',
+//        opacity: 0.75,
+//        src: 'dados/r2d2.png'
+//    }))
+//});
 
 var meuMapa;
 function init() {
+
     meuMapa = new ol.Map({
         target: 'MeuMapa',
         renderer: 'canvas',
@@ -46,12 +47,6 @@ function init() {
     var openStreetMapLayer = new ol.layer.Tile({
         source: new ol.source.OSM()
     });
-
-
-
-    var openStreetMapLayer = new ol.layer.Tile({
-        source: new ol.source.OSM()
-    });
     meuMapa.addLayer(openStreetMapLayer);
     var bingLayer = new ol.layer.Tile({
         source: new ol.source.BingMaps({
@@ -61,62 +56,76 @@ function init() {
     });
     bingLayer.setOpacity(.3);
     meuMapa.addLayer(bingLayer);
+
+    $.ajax({
+        url: urlString,
+        data: {
+            format: 'json'
+        },
+        success: function (data) {
+            console.log(data);
+            plotOnMap(data);
+
+        },
+        error: function (e) {
+            console.log(e.message);
+        },
+        type: 'GET'
+    });
+
 }
 //Define um estilo para os pontos a serem plotados.
 
 //Indica o icone que desejamos utilizar para representar as posições
 
-var pointStyle = new ol.style.Style({
-  image : new ol.style.Icon(({
-    anchor : [ 0, 0 ],
-    anchorXUnits : 'fraction',
-    anchorYUnits : 'fraction',
-    opacity : 0.75,
-    src : 'dados/r2d2.png'
-  }))
-});
+
 
 //Function que recebe a lista de objetos e plota os pontos
 
 function plotOnMap(json) {
 
-  // cria arranjo de features
-  var features = new Array();
+    // cria arranjo de features
+    var features = new Array();
 
-  console.log(json.length);
-  var count = 0;
-  for (var i = 0; i < json.length; i++) {
+    console.log(json.length);
+    var count = 0;
+    for (var i = 0; i < json.length; i++) {
 
-   // cria ponto a partir de coordenadas em graus
-    var point = [ json[i].lon, json[i].lat ];
+        // cria ponto a partir de coordenadas em graus
+        var point = [json[i].lon, json[i].lat];
 
-   // converte para coordenadas de tela
-    var pos = ol.proj.fromLonLat(point);
+        // converte para coordenadas de tela
+        var pos = ol.proj.fromLonLat(point);
 
-   // cria feature
+        // cria feature
 
-    var feature = new ol.Feature(new ol.geom.Point(pos));
+        var feature = new ol.Feature(new ol.geom.Point(pos));
 
-   // define o estilo da feature
-    feature.setStyle(pointStyle);
+        // define o estilo da feature
+        feature.setStyle(pointStyle);
 
-  //adiciona feature a lista de features
+        //adiciona feature a lista de features
 
-    features[features.length] = feature;
-  }
+        features[features.length] = feature;
+    }
 
-  // cria um vetor de features para colocação em uma camada de visualização 
-  var source = new ol.source.Vector({
-    features : features
-  });
+    // cria um vetor de features para colocação em uma camada de visualização 
+    var source = new ol.source.Vector({
+        features: features
+    });
 
-  //cria uma camada com o vetor de features
-  featuresLayer = new ol.layer.Vector({
-     source : source,
-     style : pointStyle
-  });
+    //cria uma camada com o vetor de features
+    featuresLayer = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            projection: 'EPSG:4326',
+            format: new ol.format.GPX(),
+            url: 'dados/posicao_proc.gpx'
+        }),
+        style: pointStyle
+    });
 
-   //adiciona a camada ao mapa
+    //adiciona a camada ao mapa
+    meuMapa.addLayer(featuresLayer);
 
-  meuMapa.addLayer(featuresLayer);
+
 }

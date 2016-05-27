@@ -29,7 +29,7 @@ public class UsuarioBean {
 
     private final static String apikey = "c2a9c817c3b293d067a7f59406abde0b0a1e3e78";
     private static String privatekey = "f33eb15f5b1bf8d7da85f6d1d206f83c";
-    private static String urlbase = "http://gateway.marvel.com/v1/public/characters";
+    private static String urlbase = "http://developer.marvel.com";
 
     @PersistenceContext(unitName = "DerbyPU")
     private EntityManager em;

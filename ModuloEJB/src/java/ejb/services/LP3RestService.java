@@ -2,8 +2,10 @@ package ejb.services;
 
 
 import ejb.beans.PosicaoBean;
+import ejb.beans.PosicaoBeanGPX;
 import ejb.beans.UsuarioBean;
 import ejb.entities.Posicao;
+import ejb.entities.PosicaoGPX;
 import ejb.entities.Usuario;
 import java.io.StringReader;
 import java.util.List;
@@ -32,6 +34,8 @@ public class LP3RestService {
     UsuarioBean usuarioBean;
     @EJB
     PosicaoBean posicaoBean;
+    @EJB
+    PosicaoBeanGPX posicaoBeanG;
 
     @Path("/novousuario")
     @PUT
@@ -69,8 +73,20 @@ public class LP3RestService {
 
     @GET
     @Path("/posicoes/{login}")
-    @Produces({"application/xml"})
+    @Produces({"application/json"})
     public List<Posicao> listaPosicoes(@PathParam("login") final String login) {
         return posicaoBean.list(login);
     }
+    @GET
+    @Path("/posicoesXML/{login}")
+    @Produces({"application/xml"})
+    public List<Posicao> listaPosicoesXML(@PathParam("login") final String login) {
+        return posicaoBean.list(login);
+    }    
+    @GET
+    @Path("/posicoesGPX/{login}")
+    @Produces({"application/xml"})
+    public List<PosicaoGPX> listaPosicoesGPX(@PathParam("login") final String login) {
+        return posicaoBeanG.list(login);
+    }      
 }

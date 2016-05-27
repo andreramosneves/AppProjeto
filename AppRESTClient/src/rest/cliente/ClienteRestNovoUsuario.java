@@ -20,7 +20,7 @@ public class ClienteRestNovoUsuario {
         String udata = "<usuario><nome>denis</nome><login>denis</login>";
         udata = udata + "<sobrenome>JR</sobrenome><senha>" + Hash.generateStrongPasswordHash("senha")  + "</senha></usuario>";
         HttpClient cliente = HttpClients.createDefault();
-        HttpPut httpput = new HttpPut("http://localhost:8080/AppFrontController/LP3Rest/lp3/novousuario");
+        HttpPut httpput = new HttpPut("http://localhost:8081/AppFrontController/LP3Rest/lp3/novousuario");
         StringEntity se = new StringEntity(udata, ContentType.TEXT_XML);
         httpput.setEntity(se);
         HttpResponse response = cliente.execute(httpput);
