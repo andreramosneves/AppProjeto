@@ -1,6 +1,10 @@
 var meuMapa;
 var userName = getCookie('usuario');//document.getElementById('userValue').value;
 
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -151,10 +155,11 @@ function init() {
                     },
                     success: function (data) {
 //                        xmlString = (new XMLSerializer()).serializeToString(data);
-//                            console.log(dataJ['total']);
                             var dataJ = data['data'];
+                            var intA = dataJ['total'];
+                            console.log(getRandomInt(0,intA));
                             var results = dataJ['results'];
-                            var thumbnail = results[1].thumbnail;
+                            var thumbnail = results[getRandomInt(0,intA)].thumbnail;
                         console.log(data['attributionHTML']);
                         $(element).popover({
                             'placement': 'top',
