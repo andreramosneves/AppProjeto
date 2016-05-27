@@ -17,7 +17,7 @@ import org.apache.http.impl.client.HttpClients;
 public class ClienteRestNovaPosicao {
 
     public static void main(String[] args) throws IOException {
-        String pdata = "<posicao><login>denis</login>";
+        String pdata = "<posicao><login>ROGER</login>";
         pdata = pdata + "<timestamp>";
         Timestamp ts = new Timestamp(Calendar.getInstance().getTimeInMillis());
         pdata = pdata + ts.toString() + "</timestamp><lat>0.0</lat><lon>10.0</lon></posicao>";
